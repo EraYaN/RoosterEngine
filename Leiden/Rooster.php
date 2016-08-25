@@ -53,13 +53,14 @@ class Rooster
 		debug_msg('Cleaned up...');		
 	}
 	private function ProcessConfig(){
-		if(empty($this->c_config['year'])){
+		/*if(empty($this->c_config['year'])){
 			if(date('W')<SEPARATION_WEEK_SCHOOLYEAR){
 				$this->c_config['year'] = intval(date('Y')-1);
 			} else {
 				$this->c_config['year'] = intval(date('Y'));
 			}
-		}
+		}*/
+        $this->c_config['year'] = 2015;
 
 		if(empty($this->c_config['faculty'])){			
 			$this->c_config['faculty'] = DEFAULT_ROOSTER_FACULTY;
@@ -213,7 +214,7 @@ class Rooster
 			if(array_key_exists($v[0],$dagen_search)){
 				//Day
 				$c_day = $dagen_search[$v[0]];
-				if(trim(mb_strtolower($v[5]))=='datum'){
+				if(trim(mb_strtolower($v[3]))=='datum'){
 					$heeft_datum = true;
 				} else {
 					$heeft_datum = false;
@@ -223,7 +224,7 @@ class Rooster
 				$ri = new RoosterItemSet();
 				//$ri->dag = $c_day;
 
-				$tijdvak = explode("-",$v[0]);
+				$tijdvak = explode("-",$v[4]);
 				if(count($tijdvak)==1){
 					$ri->start = $tijdvak[0];
 					$ri->end = $tijdvak[0];
@@ -233,17 +234,17 @@ class Rooster
 					$ri->end = $tijdvak[1];
 				}
 				
-				$ri->studyguidenumber = mb_substr($v[3],0,-1);
+				$ri->studyguidenumber = mb_substr($v[2],0,-1);
 				$ri->academicyear = $this->c_config['year'].'-'.($this->c_config['year']+1);
-				$ri->type = mb_substr($v[3],-1,1);
+				$ri->type = mb_substr($v[2],-1,1);
 
-				$ri->course = $v[1];
-				$ri->group = $v[2];				
+				$ri->course = $v[0];
+				$ri->group = $v[1];				
 				
-				$ri->teacher = $v[4];
+				$ri->teacher = $v[5];
 
 				if($heeft_datum){
-					$datumsplit = explode('/',$v[5]);
+					$datumsplit = explode('/',$v[3]);
 					$datum = new DateTime();
 					$datum->setDate($this->c_config['year'],$datumsplit[1],$datumsplit[0]);
 					if($datum->format('W')<=SEPARATION_WEEK_SCHOOLYEAR){						
@@ -253,7 +254,7 @@ class Rooster
 					$ri->data[] = $datum;
 				} else {
 					$weken = array();
-					$wekensets = explode(',',$v[5]);
+					$wekensets = explode(',',$v[3]);
 					foreach($wekensets as $weekset){
 						$weekset = explode('-',$weekset);
 						if(count($weekset)>=2){

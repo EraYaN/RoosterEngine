@@ -42,7 +42,7 @@ define('ICAL_DATE','Ymd\THis');
 define('ICAL_TZ','Europe/Amsterdam');
 
 define('PRODUCT_NAME','EraYaN\'s Leiden Rooster Parser');
-define('PRODUCT_VERSION','v0.9');
+define('PRODUCT_VERSION','v1.0');
 
 require_once('RoosterItemBase.php');
 require_once('RoosterItem.php');

@@ -11,8 +11,9 @@ require_once('main.php');
 <body>
 	<h1><?=PRODUCT_NAME.' '.PRODUCT_VERSION?></h1>
 	<h2>Index</h2>
-	<a href="/get_link.php" target="_blank">Get a new link</a>
+	<a href="get_link.php" target="_blank">Get a new link</a>
 	<?php	
+    echo 'Week number:'.date('W');
 	$payload = array();
 	if(!empty($_GET['pl'])){		
 		$payload = json_decode(gzuncompress(base64_decode($_GET['pl'])),true);
@@ -50,7 +51,7 @@ require_once('main.php');
 		$end_timestamp = microtime(true);
 		echo '<p>Parsed '.count($payload).' rooster'.(count($payload)==1?'':'s').' in '.autoFormatSeconds(($end_timestamp-$start_timestamp),2).'.</p>';
 	} else {
-		echo '<p>No payload, get a link <a href="/get_link.php">here</a>';
+		echo '<p>No payload, get a link <a href="get_link.php">here</a>';
 	}
 	
 

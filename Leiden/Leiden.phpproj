@@ -15,7 +15,7 @@
     <PHPDevPort>26272</PHPDevPort>
     <PHPDevHostName>localhost</PHPDevHostName>
     <IISProjectUrl>http://localhost:26272/</IISProjectUrl>
-    <CustomServerUrl>http://localhost/</CustomServerUrl>
+    <CustomServerUrl>http://labs.erayan.com/</CustomServerUrl>
     <PublishBeforeDebugProfile>Labs</PublishBeforeDebugProfile>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)' == 'Debug' ">
